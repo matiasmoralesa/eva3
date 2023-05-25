@@ -21,7 +21,6 @@ let registra = ()=> {
     registro[4] = password;
     registro[5] = telefono;
     console.log(registro);
-    document.getElementById("registro").value = registro;
 }
 
 
