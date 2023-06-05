@@ -31,6 +31,7 @@ let registra = ()=> {
     let registros = {"nombre":nombre,"apellido":apellido,"correo":correo,"telefono":telefono,"direccion":direccion,"edad":edad,"fecha":date,"suscripcion":suscripcion};
     let listadoRegistros =  localStorage.getItem("listadoRegistros");
     let listadoRegistrosAntiguo = JSON.parse(listadoRegistros);
+    let eContenedorTabla = document.getElementById("contenedorTabla");
     let listadoRegistrosNuevo
     if (listadoRegistrosAntiguo==null){
         listadoRegistrosNuevo = [registros]
@@ -40,9 +41,39 @@ let registra = ()=> {
 
     console.log(registros);
     console.log(listadoRegistrosAntiguo);
-    console.log(listadoRegistrosNuevo);
 
     localStorage.setItem('registros',JSON.stringify(listadoRegistrosNuevo));
+    
+    render = "<table>"
+    render += "<tr><th>Nombre</th><th>Apellido</th><th>Correo</th><th>telefono</th><th>Direccion</th><th>Edad</th><th>Fecha</th><th>Suscripcion</th></tr>"
+    for (let i = 0; i < listadoRegistrosNuevo.length; i++) {
+        const element = listadoRegistrosNuevo[i];
+        render += "<tr>";
+        render += "<td>"+element.nombre+"</td>";
+        render += "<td>"+element.apellido+"</td>";
+        render += "<td>"+element.correo+"</td>";
+        render += "<td>"+element.telefono+"</td>";
+        render += "<td>"+element.direccion+"</td>";
+        render += "<td>"+element.edad+"</td>";
+        render += "<td>"+element.fecha+"</td>";
+        render += "<td>"+element.suscripcion+"</td>";
+        render += "<button id='btnEditar'>"+i+"Editar</button>";
+        render += "<button id='btnEliminar'>"+i+"Eliminar</button>";
+        render += "</td>";
+        render += "</tr>";
+    }
+    render += "</table>";
+    eContenedorTabla.innerHTML = render;
+    for (let i = 0; i < listadoRegistrosNuevo.length; i++) {
+        var eBtn = document.getElementById("btnEditar"+i);
+        let element = listadoRegistrosNuevo[i];
+        eBtn.addEventListener("click",()=> {alert("hola"+" "+element.nombre+" "+element.apellido);});
+        var eBtn2 = document.getElementById("btnEliminar"+i);
+        eBtn2 = document.getElementById("btnEliminar"+i);
+        eBtn2.addEventListener("click",()=> {alert("adios");});
+        
+    }
+    
 }
 
 
