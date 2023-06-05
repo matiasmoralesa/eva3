@@ -57,6 +57,7 @@ let registra = ()=> {
         render += "<td>"+element.edad+"</td>";
         render += "<td>"+element.fecha+"</td>";
         render += "<td>"+element.suscripcion+"</td>";
+        render += "<td>";
         render += "<button id='btnEditar'>"+i+"Editar</button>";
         render += "<button id='btnEliminar'>"+i+"Eliminar</button>";
         render += "</td>";
@@ -64,16 +65,14 @@ let registra = ()=> {
     }
     render += "</table>";
     eContenedorTabla.innerHTML = render;
-    for (let i = 0; i < listadoRegistrosNuevo.length; i++) {
-        var eBtn = document.getElementById("btnEditar"+i);
-        let element = listadoRegistrosNuevo[i];
-        eBtn.addEventListener("click",()=> {alert("hola"+" "+element.nombre+" "+element.apellido);});
-        var eBtn2 = document.getElementById("btnEliminar"+i);
-        eBtn2 = document.getElementById("btnEliminar"+i);
-        eBtn2.addEventListener("click",()=> {alert("adios");});
-        
-    }
-    
+    // for (let i = 0; i < listadoRegistrosNuevo.length; i++) {
+      //  var eBtn = document.getElementById("btnEditar"+i);
+        //let element = listadoRegistrosNuevo[i];
+        //eBtn.addEventListener("click",()=> {alert("hola"+" "+element.nombre+" "+element.apellido)});
+        //var eBtn2 = document.getElementById("btnEliminar"+i);
+        //eBtn2 = document.getElementById("btnEliminar"+i);
+        //eBtn2.addEventListener("click",()=> {alert("adios")});
+    //}
 }
 
 
