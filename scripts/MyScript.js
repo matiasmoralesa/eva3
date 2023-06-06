@@ -1,4 +1,5 @@
 let registra = ()=> {
+    let eContenedorTabla = document.getElementById("contenedorTabla");
     let eNombre = document.getElementById("nombre");
     let eApellido = document.getElementById("apellido");
     let eCorreo = document.getElementById("correo");
@@ -31,7 +32,6 @@ let registra = ()=> {
     let registros = {"nombre":nombre,"apellido":apellido,"correo":correo,"telefono":telefono,"direccion":direccion,"edad":edad,"fecha":date,"suscripcion":suscripcion};
     let listadoRegistros =  localStorage.getItem("listadoRegistros");
     let listadoRegistrosAntiguo = JSON.parse(listadoRegistros);
-    let eContenedorTabla = document.getElementById("contenedorTabla");
     let listadoRegistrosNuevo
     if (listadoRegistrosAntiguo==null){
         listadoRegistrosNuevo = [registros]
@@ -41,7 +41,7 @@ let registra = ()=> {
 
     console.log(registros);
     console.log(listadoRegistrosAntiguo);
-
+    console.log(listadoRegistrosNuevo);
     localStorage.setItem('registros',JSON.stringify(listadoRegistrosNuevo));
     
     render = "<table>"
@@ -65,14 +65,12 @@ let registra = ()=> {
     }
     render += "</table>";
     eContenedorTabla.innerHTML = render;
-    // for (let i = 0; i < listadoRegistrosNuevo.length; i++) {
-      //  var eBtn = document.getElementById("btnEditar"+i);
-        //let element = listadoRegistrosNuevo[i];
-        //eBtn.addEventListener("click",()=> {alert("hola"+" "+element.nombre+" "+element.apellido)});
-        //var eBtn2 = document.getElementById("btnEliminar"+i);
-        //eBtn2 = document.getElementById("btnEliminar"+i);
-        //eBtn2.addEventListener("click",()=> {alert("adios")});
-    //}
+     for (let i = 0; i < listadoRegistrosNuevo.length; i++) {
+        var eBtn = document.getElementById("btnEditar"+i);
+        let element = listadoRegistrosNuevo[i];
+        eBtn.addEventListener("click",()=> {alert("hola"+" "+element.nombre+" "+element.apellido)});
+        
+    }
 }
 
 
