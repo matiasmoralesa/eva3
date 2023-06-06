@@ -30,9 +30,8 @@ let registra = ()=> {
     console.log(registro);
 
     let registros = {"nombre":nombre,"apellido":apellido,"correo":correo,"telefono":telefono,"direccion":direccion,"edad":edad,"fecha":date,"suscripcion":suscripcion};
-    let listadoRegistros =  localStorage.getItem("listadoRegistros");
+    let listadoRegistros =  localStorage.getItem("registros");
     let listadoRegistrosAntiguo = JSON.parse(listadoRegistros);
-    let listadoRegistrosNuevo
     if (listadoRegistrosAntiguo==null){
         listadoRegistrosNuevo = [registros]
     }else{
