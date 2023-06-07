@@ -1,4 +1,4 @@
-var modicar = (listadoRegistrosNuevo)=>{
+var modificar = (listadoRegistrosNuevo)=>{
     let eNombre = document.getElementById("nombre");
     let eApellido = document.getElementById("apellido");
     let eCorreo = document.getElementById("correo");
@@ -49,8 +49,8 @@ var cargarTabla = (listadoRegistrosNuevo)=>{
         render += "<td>"+element.fecha+"</td>";
         render += "<td>"+element.suscripcion+"</td>";
         render += "<td>";
-        render += "<button id='btnEditar"+i+"'>Editar</button>";
-        render += "<button id='btnEliminar"+i+"'>Eliminar</button>";
+        render += "<button type='button' class='btn waves-effect waves-light' id='btnEditar"+i+"'>Editar</button>";
+        render += "<button type='button' class='btn waves-effect waves-light' id='btnEliminar"+i+"'>Eliminar</button>";
         render += "</td>";
         render += "</tr>";
     }
@@ -69,11 +69,11 @@ var cargarTabla = (listadoRegistrosNuevo)=>{
             eEdad = element.edad;
             eDate = element.date;
             eSuscripcion = element.suscripcion;
-            let sEditar = "<button type='button' id='btnEditar' value='"+i+"'>Editar</button>";
+            let sEditar = "<button type='button'class='btn waves-effect waves-light' id='btnEditar' value='"+i+"'>Editar</button>";
             let contenedorBoton = document.getElementById("contenedorBtnExtra");
             contenedorBoton.innerHTML = sEditar;
             let eBtnEditarUp = document.getElementById("btnEditar");
-            eBtnEditarUp.addEventListener("click",()=>modicar(listadoRegistrosNuevo));
+            eBtnEditarUp.addEventListener("click",()=>modificar(listadoRegistrosNuevo));
         })   
     }
 }
