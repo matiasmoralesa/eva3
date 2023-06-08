@@ -30,6 +30,19 @@ var modificar = (listadoRegistrosNuevo)=>{
     cargarTabla(listadoRegistrosNuevo)
 }
 
+var eliminar = (listadoRegistrosNuevo)=>{
+    let eBtnEliminarUp = document.getElementById("btnEliminar");
+    let indice = eBtnEliminarUp.value;
+    console.log(listadoRegistrosNuevo)
+    lista = listadoRegistrosNuevo.filter((p)=p.id!=indice)
+    lista = lista.map((p,index)=>{return{...p,"id":index}})
+    console.log(lista)
+    localStorage.setItem("registros",JSON.stringify(lista));
+    cargarTabla(lista) 
+}
+
+
+
 var cargarTabla = (listadoRegistrosNuevo)=>{
     let eContenedorTabla = document.getElementById("contenedorTabla");
     let eNombre = document.getElementById("nombre");
@@ -70,11 +83,28 @@ var cargarTabla = (listadoRegistrosNuevo)=>{
             eDate = element.date;
             eSuscripcion = element.suscripcion;
             let sEditar = "<button type='button'class='btn waves-effect waves-light' id='btnEditar' value='"+i+"'>Editar</button>";
+            
             let contenedorBoton = document.getElementById("contenedorBtnExtra");
             contenedorBoton.innerHTML = sEditar;
             let eBtnEditarUp = document.getElementById("btnEditar");
             eBtnEditarUp.addEventListener("click",()=>modificar(listadoRegistrosNuevo));
-        })   
+        })
+        eBtn2.addEventListener("click",()=>{
+            eNombre = element.nombre;
+            eApellido = element.apellido;
+            eCorreo = element.correo;
+            eTelefono = element.telefono;
+            eDireccion = element.direccion;
+            eEdad = element.edad;
+            eDate = element.date;
+            eSuscripcion = element.suscripcion;
+            let sEliminar = "<button type='button'class='btn waves-effect waves-light' id='btnEliminar' value='"+i+"'>Eliminar</button>";
+            let contenedorBoton = document.getElementById("btnEliminar");
+            contenedorBoton.innerHTML = sEliminar;
+            let eBtnEliminarUp = document.getElementById("btnEliminar");
+            eBtnEliminarUp.addEventListener("click",()=>eliminar(listadoRegistrosNuevo))           
+        })
+        
     }
 }
 
@@ -108,13 +138,13 @@ var registra = ()=> {
     registro[6] = date;
     registro[7] = suscripcion;
     console.log(registro);
-
-    let registros = {"nombre":nombre,"apellido":apellido,"correo":correo,"telefono":telefono,"direccion":direccion,"edad":edad,"fecha":date,"suscripcion":suscripcion};
     let listadoRegistros =  localStorage.getItem("registros");
     let listadoRegistrosAntiguo = JSON.parse(listadoRegistros);
     if (listadoRegistrosAntiguo==null){
+        let registros = {"id":0, "nombre":nombre,"apellido":apellido,"correo":correo,"telefono":telefono,"direccion":direccion,"edad":edad,"fecha":date,"suscripcion":suscripcion};
         listadoRegistrosNuevo = [registros]
     }else{
+        let registros = {"id":listadoRegistrosAntiguo.length, "nombre":nombre,"apellido":apellido,"correo":correo,"telefono":telefono,"direccion":direccion,"edad":edad,"fecha":date,"suscripcion":suscripcion};
         listadoRegistrosNuevo = [...listadoRegistrosAntiguo,registros]
     }
 
