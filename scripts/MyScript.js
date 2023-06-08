@@ -7,7 +7,7 @@ var modificar = (listadoRegistrosNuevo)=>{
     let eEdad = document.getElementById("edad");
     let eDate = document.getElementById("date");
     let eSuscripcion = document.getElementById("suscripcion");
-    let eBtnEditarUp = document.getElementById("btnEditarUp");
+    let eBtnEditarUp = document.getElementById("btnEditar");
 
     let nombre = eNombre.value;
     let apellido = eApellido.value;
@@ -34,7 +34,7 @@ var eliminar = (listadoRegistrosNuevo)=>{
     let eBtnEliminarUp = document.getElementById("btnEliminar");
     let indice = eBtnEliminarUp.value;
     console.log(listadoRegistrosNuevo)
-    lista = listadoRegistrosNuevo.filter((p)=p.id!=indice)
+    lista = listadoRegistrosNuevo.filter((p)=>p.id!=indice)
     lista = lista.map((p,index)=>{return{...p,"id":index}})
     console.log(lista)
     localStorage.setItem("registros",JSON.stringify(lista));
@@ -47,10 +47,16 @@ var cargarTabla = (listadoRegistrosNuevo)=>{
     let eContenedorTabla = document.getElementById("contenedorTabla");
     let eNombre = document.getElementById("nombre");
     let eApellido = document.getElementById("apellido");
+    let eCorreo = document.getElementById("correo");
+    let eTelefono = document.getElementById("telefono");
+    let eDireccion = document.getElementById("direccion");
+    let eEdad = document.getElementById("edad");
+    let eDate = document.getElementById("date");
+    let eSuscripcion = document.getElementById("suscripcion");
 
     render = "<table>"
-    render += "<tr><th>Nombre</th><th>Apellido</th><th>Correo</th><th>telefono</th><th>Direccion</th><th>Edad</th><th>Fecha</th><th>Suscripcion</th></tr>"
-    for (let i = 0; i < listadoRegistrosNuevo.length; i++) {
+    render += "<tr><th>Nombre</th><th>Apellido</th><th>Correo</th><th>telefono</th><th>Direccion</th><th>Edad</th><th>Date</th><th>Suscripcion</th></tr>"
+    for (let i = 0; i < listadoRegistrosNuevo.length; i++){
         const element = listadoRegistrosNuevo[i];
         render += "<tr>";
         render += "<td>"+element.nombre+"</td>";
@@ -59,7 +65,7 @@ var cargarTabla = (listadoRegistrosNuevo)=>{
         render += "<td>"+element.telefono+"</td>";
         render += "<td>"+element.direccion+"</td>";
         render += "<td>"+element.edad+"</td>";
-        render += "<td>"+element.fecha+"</td>";
+        render += "<td>"+element.date+"</td>";
         render += "<td>"+element.suscripcion+"</td>";
         render += "<td>";
         render += "<button type='button' class='btn waves-effect waves-light' id='btnEditar"+i+"'>Editar</button>";
@@ -69,19 +75,19 @@ var cargarTabla = (listadoRegistrosNuevo)=>{
     }
     render += "</table>";
     eContenedorTabla.innerHTML = render;
-     for (let i = 0; i < listadoRegistrosNuevo.length; i++) {
+     for (let i = 0; i < listadoRegistrosNuevo.length; i++){
         var eBtn = document.getElementById("btnEditar"+i);
         var eBtn2 = document.getElementById("btnEliminar"+i);
         let element = listadoRegistrosNuevo[i]
         eBtn.addEventListener("click",()=>{
-            eNombre = element.nombre;
-            eApellido = element.apellido;
-            eCorreo = element.correo;
-            eTelefono = element.telefono;
-            eDireccion = element.direccion;
-            eEdad = element.edad;
-            eDate = element.date;
-            eSuscripcion = element.suscripcion;
+            eNombre.value = element.nombre;
+            eApellido.value = element.apellido;
+            eCorreo.value = element.correo;
+            eTelefono.value = element.telefono;
+            eDireccion.value = element.direccion;
+            eEdad.value = element.edad;
+            eDate.value = element.date;
+            eSuscripcion.value = element.suscripcion;
             let sEditar = "<button type='button'class='btn waves-effect waves-light' id='btnEditar' value='"+i+"'>Editar</button>";
             
             let contenedorBoton = document.getElementById("contenedorBtnExtra");
@@ -99,7 +105,7 @@ var cargarTabla = (listadoRegistrosNuevo)=>{
             eDate = element.date;
             eSuscripcion = element.suscripcion;
             let sEliminar = "<button type='button'class='btn waves-effect waves-light' id='btnEliminar' value='"+i+"'>Eliminar</button>";
-            let contenedorBoton = document.getElementById("btnEliminar");
+            let contenedorBoton = document.getElementById("contenedorBtnExtra");
             contenedorBoton.innerHTML = sEliminar;
             let eBtnEliminarUp = document.getElementById("btnEliminar");
             eBtnEliminarUp.addEventListener("click",()=>eliminar(listadoRegistrosNuevo))           
@@ -141,10 +147,10 @@ var registra = ()=> {
     let listadoRegistros =  localStorage.getItem("registros");
     let listadoRegistrosAntiguo = JSON.parse(listadoRegistros);
     if (listadoRegistrosAntiguo==null){
-        let registros = {"id":0, "nombre":nombre,"apellido":apellido,"correo":correo,"telefono":telefono,"direccion":direccion,"edad":edad,"fecha":date,"suscripcion":suscripcion};
+        let registros = {"id":0, "nombre":nombre,"apellido":apellido,"correo":correo,"telefono":telefono,"direccion":direccion,"edad":edad,"date":date,"suscripcion":suscripcion};
         listadoRegistrosNuevo = [registros]
     }else{
-        let registros = {"id":listadoRegistrosAntiguo.length, "nombre":nombre,"apellido":apellido,"correo":correo,"telefono":telefono,"direccion":direccion,"edad":edad,"fecha":date,"suscripcion":suscripcion};
+        let registros = {"id":listadoRegistrosAntiguo.length, "nombre":nombre,"apellido":apellido,"correo":correo,"telefono":telefono,"direccion":direccion,"edad":edad,"date":date,"suscripcion":suscripcion};
         listadoRegistrosNuevo = [...listadoRegistrosAntiguo,registros]
     }
 
@@ -156,9 +162,9 @@ var registra = ()=> {
 }
 
 var cargarDatos = ()=>{
-    let listadoRegistrosNuevo = localStorage.getItem("registros");
-    let listadoRegistrosAntiguo = JSON.parse(listadoRegistrosNuevo);
-    cargarTabla(listadoRegistrosAntiguo)
+    let listadoRegistrosAntiguo = localStorage.getItem("registros");
+    let listadoRegistrosNuevo = JSON.parse(listadoRegistrosAntiguo);
+    cargarTabla(listadoRegistrosNuevo)
 }
 
 document.getElementById("btn").addEventListener("click",registra)
