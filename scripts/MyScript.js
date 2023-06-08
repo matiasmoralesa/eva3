@@ -148,7 +148,6 @@ var registra = ()=> {
         listadoRegistrosNuevo = [...listadoRegistrosAntiguo,registros]
     }
 
-    console.log(registros);
     console.log(listadoRegistrosAntiguo);
     console.log(listadoRegistrosNuevo);
     localStorage.setItem('registros',JSON.stringify(listadoRegistrosNuevo));
@@ -156,6 +155,11 @@ var registra = ()=> {
     cargarTabla(listadoRegistrosNuevo);
 }
 
-
+var cargarDatos = ()=>{
+    let listadoRegistrosNuevo = localStorage.getItem("registros");
+    let listadoRegistrosAntiguo = JSON.parse(listadoRegistrosNuevo);
+    cargarTabla(listadoRegistrosAntiguo)
+}
 
 document.getElementById("btn").addEventListener("click",registra)
+addEventListener('load',cargarDatos)
