@@ -33,6 +33,7 @@ var modificar = (listadoRegistrosNuevo)=>{
 var eliminar = (listadoRegistrosNuevo)=>{
     let eBtnEliminarUp = document.getElementById("btnEliminar");
     let indice = eBtnEliminarUp.value;
+    
     console.log(listadoRegistrosNuevo)
     lista = listadoRegistrosNuevo.filter((p)=>p.id!=indice)
     lista = lista.map((p,index)=>{return{...p,"id":index}})
@@ -53,6 +54,7 @@ var cargarTabla = (listadoRegistrosNuevo)=>{
     let eEdad = document.getElementById("edad");
     let eDate = document.getElementById("date");
     let eSuscripcion = document.getElementById("suscripcion");
+    console.log(listadoRegistrosNuevo)
 
     render = "<table>"
     render += "<tr><th>Nombre</th><th>Apellido</th><th>Correo</th><th>telefono</th><th>Direccion</th><th>Edad</th><th>Date</th><th>Suscripcion</th></tr>"
@@ -80,6 +82,7 @@ var cargarTabla = (listadoRegistrosNuevo)=>{
         var eBtn2 = document.getElementById("btnEliminar"+i);
         let element = listadoRegistrosNuevo[i]
         eBtn.addEventListener("click",()=>{
+            
             eNombre.value = element.nombre;
             eApellido.value = element.apellido;
             eCorreo.value = element.correo;
@@ -96,14 +99,14 @@ var cargarTabla = (listadoRegistrosNuevo)=>{
             eBtnEditarUp.addEventListener("click",()=>modificar(listadoRegistrosNuevo));
         })
         eBtn2.addEventListener("click",()=>{
-            eNombre = element.nombre;
-            eApellido = element.apellido;
-            eCorreo = element.correo;
-            eTelefono = element.telefono;
-            eDireccion = element.direccion;
-            eEdad = element.edad;
-            eDate = element.date;
-            eSuscripcion = element.suscripcion;
+            eNombre.value = element.nombre;
+            eApellido.value = element.apellido;
+            eCorreo.value = element.correo;
+            eTelefono.value = element.telefono;
+            eDireccion.value = element.direccion;
+            eEdad.value = element.edad;
+            eDate.value = element.date;
+            eSuscripcion.value = element.suscripcion;
             let sEliminar = "<button type='button'class='btn waves-effect waves-light' id='btnEliminar' value='"+i+"'>Eliminar</button>";
             let contenedorBoton = document.getElementById("contenedorBtnExtra");
             contenedorBoton.innerHTML = sEliminar;
